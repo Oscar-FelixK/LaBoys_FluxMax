@@ -8,47 +8,49 @@ Consider two circular urns (in 2D) of equal radius  $r=1$ at center-center separ
 
 The classical 'bulk' Maxwellian velocity probability distribution for a 2D system at temperature $T$ is (all particles are assumed to have mass $m=1$)
 
-$$f_{\rm bulk}(\vec{v}) = \frac{1}{2\pi T} \exp\left[-\frac{v_x^2+v_y^2}{2k_BT}\right],$$
+$$f_{\mathrm{bulk}}(\vec{v}) = \frac{1}{2\pi k_B T} \exp\left[-\frac{v_x^2+v_y^2}{2k_B T}\right],$$
 
-if we denote by $v_x$ and $v_y$ the cartesian components of the velocity vector $\vec{v}=(v_x,v_y)$. The denominator $2\pi T$ originates from the requirement, that $f(\vec{v})$ is normalized, 
+if we denote by $v_x$ and $v_y$ the cartesian components of the velocity vector $\vec{v}=(v_x,v_y)$. The denominator $2\pi k_B T$ originates from the requirement that $f(\vec{v})$ is normalized,
 
-$$\langle 1\rangle_{\rm bulk} = \int_{-\infty}^\infty dv_x \int_{-\infty}^\infty dv_y \ f_{\rm bulk}(\vec{v}) = \int_0^\infty ds \int_0^{2\pi} d\phi\ s f(s\ \cos\phi,s\ \sin\phi) = 1.$$
+$$\langle 1\rangle_{\mathrm{bulk}} = \int_{-\infty}^\infty dv_x \int_{-\infty}^\infty dv_y \ f_{\mathrm{bulk}}(\vec{v}) = \int_0^\infty ds \int_0^{2\pi} d\phi\ s f_{\mathrm{bulk}}(s\cos\phi,s\sin\phi) = 1.$$
 
-Here we just mentioned how the integral is usually evaluated upon introducing polar coordinates $v_x=s\ \cos\phi$ and $v_y=s\ \sin\phi$, with speed $s=|\vec{v}|\in\Re_{>0}$ and angle $\phi\in[0,2\pi]$, and the additional factor $s$ stems from the Jacobian. 
+Here we just mentioned how the integral is usually evaluated upon introducing polar coordinates $v_x=s\cos\phi$ and $v_y=s\sin\phi$, with speed $s=|\vec{v}|\in\mathbb{R}_{>0}$ and angle $\phi\in[0,2\pi]$, and the additional factor $s$ stems from the Jacobian.
 Similarly, the mean speed and the mean squared speed are 
 
-$$\langle |\vec{v}|\rangle_{\rm bulk} = \langle s\rangle_{\rm bulk} = \int_0^\infty ds \int_0^{2\pi} d\phi\ s^2 f_{\rm bulk}(s\ \cos\phi,s\ \sin\phi) = \frac{\sqrt{\pi k_BT}}{\sqrt{2}}$$ 
+$$\langle |\vec{v}|\rangle_{\mathrm{bulk}} = \langle s\rangle_{\mathrm{bulk}} = \int_0^\infty ds \int_0^{2\pi} d\phi\ s^2 f_{\mathrm{bulk}}(s\cos\phi,s\sin\phi) = \frac{\sqrt{\pi k_B T}}{\sqrt{2}}$$
 
-$$\langle v^2\rangle_{\rm bulk} =\langle s^2\rangle_{\rm bulk} = \int_0^\infty ds \int_0^{2\pi} d\phi\ s^3 f_{\rm bulk}(s\ \cos\phi,s\ \sin\phi) = 2 k_BT.$$
+$$\langle v^2\rangle_{\mathrm{bulk}} =\langle s^2\rangle_{\mathrm{bulk}} = \int_0^\infty ds \int_0^{2\pi} d\phi\ s^3 f_{\mathrm{bulk}}(s\cos\phi,s\sin\phi) = 2 k_B T.$$
 
-The mean kinetic energy of a particle of unit mass in 2D is therefore $\frac{1}{2}\langle v^2\rangle_{\rm bulk} = 2k_BT$, which is one $1\ k_BT$ per space dimension. If one wants to create a velocity randomly drawn from the bulk Maxwellian distribution, one can use two normal distributed components $v_x$ and $v_y$, while making sure that the standard deviation of the normal distribution is chosen such that $\langle v^2\rangle_{\rm bulk} = 2 k_BT$ indeed holds. 
+The mean kinetic energy of a particle of unit mass in 2D is therefore $\frac{1}{2}\langle v^2\rangle_{\mathrm{bulk}} = k_B T$, which is one $\frac{1}{2}k_B T$ per space dimension. If one wants to create a velocity randomly drawn from the bulk Maxwellian distribution, one can use two normally distributed components $v_x$ and $v_y$, while making sure that the standard deviation of the normal distribution is chosen such that
+$$\langle v^2\rangle_{\mathrm{bulk}} = 2 k_B T$$
+indeed holds.
 
 #### Specular reflection with probability $1-\alpha$
-During a specular reflection, the particle is elastically scattered at the urn wall, and does not feel the urn wall temperatures. If the incoming velocity of the particle is denoted by vector $\vec{v}$, and the urn's surface normal at the location of the collision point denoted by vector $\vec{n}$ (a unit vector!), then the velocity $\vec{v}_\textrm{reflected}$ of particle after reflection is given by 
+During a specular reflection, the particle is elastically scattered at the urn wall, and does not feel the urn wall temperatures. If the incoming velocity of the particle is denoted by vector $\vec{v}$, and the urn's surface normal at the location of the collision point denoted by vector $\vec{n}$ (a unit vector!), then the velocity $\vec{v}_{\text{reflected}}$ of particle after reflection is given by
 
-$$\vec{v}_\textrm{reflected} = \vec{v} - 2(\vec{v}\cdot\vec{n})\vec{n}$$
+$$\vec{v}_{\text{reflected}} = \vec{v} - 2(\vec{v}\cdot\vec{n})\vec{n}$$
 
 #### Thermal reflection with probability $\alpha$
 
 During a thermal reflection the particle is affected by the wall temperature $T$ at the collision point. $T$ is either $T_C$ or $T_H$, depending on where the collision occurs. The velocity after collision is randomly sampled from the so-called flux-weighted Maxwellian (or surface Maxwellian) 
 
-$$f_\textrm{surf}(\vec{v}_\textrm{reflected}) \propto v_n \ \exp\left[-\frac{v_n^2+v_t^2}{2k_BT}\right],$$
+$$f_{\text{surf}}(\vec{v}_{\text{reflected}}) \propto v_n \ \exp\left[-\frac{v_n^2+v_t^2}{2k_B T}\right],$$
 
-where $v_n\in\Re_{>0}$ is the normal component of $\vec{v}_\textrm{reflected}$, and $v_t\in\Re$ its tangential component with respect to the inward-pointing surface normal $\vec{n}$ at the collision point. That is, 
+where $v_n\in\mathbb{R}_{>0}$ is the normal component of $\vec{v}_{\text{reflected}}$, and $v_t\in\mathbb{R}$ its tangential component with respect to the inward-pointing surface normal $\vec{n}$ at the collision point. That is,
 
-$$\vec{v}_\textrm{reflected} = v_n \vec{n} + v_t \vec{t},$$
+$$\vec{v}_{\text{reflected}} = v_n \vec{n} + v_t \vec{t},$$
 
 
 where $\vec{t}$ apart from a sign is determined by $\vec{n}\cdot\vec{t}=0$ (the sign does not matter). 
 
 ## Task 1 
 
-This tasks should result in a function to be used in subsequent tasks. For a given surface normal vector $\vec{n}$, create a random reflected velocity vector $\vec{v}$ 
-that satisfies the flux-weighted maxwellian. To test your implementation, calculate the mean speed and mean squared speed of a large set of created $\vec{v}_\textrm{reflected}$ vectors. You should find 
+This task should result in a function to be used in subsequent tasks. For a given surface normal vector $\vec{n}$, create a random reflected velocity vector $\vec{v}$
+that satisfies the flux-weighted Maxwellian. To test your implementation, calculate the mean speed and mean squared speed of a large set of created $\vec{v}_{\text{reflected}}$ vectors. You should find
 
-$$\langle |\vec{v}_\textrm{reflected}|\rangle_\textrm{surf} = \frac{\sqrt{8 k_BT}}{\sqrt{\pi}}$$
+$$\langle |\vec{v}_{\text{reflected}}|\rangle_{\text{surf}} = \frac{\sqrt{8 k_B T}}{\sqrt{\pi}}$$
 
-$$\langle v_\textrm{reflected}^2\rangle_\textrm{surf} = 3 k_BT$$
+$$\langle |\vec{v}_{\text{reflected}}|^2\rangle_{\text{surf}} = 3 k_B T$$
 
 The function ("thermal reflection") should take the surface normal and temperature as input arguments and return a velocity vector. Add another function ("specular reflection") that takes the surface normal as input argument and returns a velocity vector using the formula mentioned earlier. 
 
@@ -68,7 +70,7 @@ $$\frac{\langle s\rangle_C}{\langle s\rangle_H} = \frac{\alpha^{-1}+(c_t+\alpha^
 
 Using data from task 4, evaluate 
 
-$$\frac{\langle s^2\rangle_C}{\langle s\rangle_C}\quad{\rm and}\quad\frac{\langle s^2\rangle_H}{\langle s\rangle_H}$$
+$$\frac{\langle s^2\rangle_C}{\langle s\rangle_C}\quad\text{and}\quad\frac{\langle s^2\rangle_H}{\langle s\rangle_H}$$
 
 as function of $\alpha$, and verify if these ratios are different or identical to the ratios of moments we provided above.  
 From kinetic theory it follows that these ratios are proportional to the pressures $p_C$ and $p_H$ in the cold and hot urns, respectively. You are hence in the position to evaluate the pressure ratio 
