@@ -1,28 +1,36 @@
 import numpy as np
-# han de clanker bitz mache lah...
-def calc_collision_normal(start_pos, velocity, hole_diameter, hole_distance, eps=1e-9):
-    p = np.asarray(start_pos, dtype=float).reshape(-1)
-    v = np.asarray(velocity, dtype=float).reshape(-1)
-    if p.shape != (2,) or v.shape != (2,):
-        raise ValueError("start_pos and velocity must each contain exactly two coordinates")
-    R = hole_diameter / 2
-    centers = np.array([[-hole_distance / 2, 0.0],
-                        [ hole_distance / 2, 0.0]])
+
+def calc_collision_normal(start_pos, velocity, hole_length, radius=1.0, eps=1e-9):
+    """
+    hole_length: length of the opening between the two circles
+                 (0 <= hole_length <= 2*radius)
+                 2*radius -> circles coincide, 0 -> circles just touch
+    """
+    if not 0 <= hole_length <= 2 * radius:
+        raise ValueError("hole_length must be between 0 and 2*radius")
+
+    p = np.asarray(start_pos, float)
+    v = np.asarray(velocity, float)
+    R = radius
+
+    # centre separation derived from the opening length
+    d = 2 * np.sqrt(R**2 - (hole_length / 2)**2)
+    centers = np.array([[-d / 2, 0.0],
+                        [ d / 2, 0.0]])
 
     speed = np.linalg.norm(v)
     if speed == 0:
-        print("no speed")
         return None, None, None
     u = v / speed                      # unit direction, so t is a distance
 
     best_t, best_normal = None, None
     for i in range(2):
         other = centers[1 - i]
-        d = p - centers[i]
+        dvec = p - centers[i]
 
-        # |d + u t|^2 = R^2  ->  t^2 + 2(d.u)t + (d.d - R^2) = 0
-        b = d @ u
-        c = d @ d - R**2
+        # |dvec + u t|^2 = R^2  ->  t^2 + 2(dvec.u)t + (dvec.dvec - R^2) = 0
+        b = dvec @ u
+        c = dvec @ dvec - R**2
         disc = b * b - c
         if disc < 0:
             continue
@@ -40,12 +48,7 @@ def calc_collision_normal(start_pos, velocity, hole_diameter, hole_distance, eps
             best_normal = (hit - centers[i]) / R   # outward unit normal
 
     if best_t is None:
-        print("fuhh")
         return None, None, None
 
     end_pos = p + u * best_t
-    return end_pos, best_normal, best_t     # best_t is the travelled distance
-
-
-#end_pos, norm, t = calc_collision_normal([0,0],[1,1],2,1)
-#print(end_pos[0])
+    return end_pos, best_normal, best_t     # best_t = travelled distance

@@ -3,8 +3,7 @@ from run_collision_sim import run_collision_simulation
 
 n_sampled_collisions = 10000
 alpha = 1
-hole_distance = 0 #distance between the two circle centers
-diamenter = 2
+hole_length = 0 #distance of the line seperating the two circles 
 position = np.array([0,0])
 k_B = 1
 velocity = [np.random.rayleigh(scale=np.sqrt(k_B * 1)),np.random.rayleigh(scale=np.sqrt(k_B * 1))] #should be drawn from the bulk mmexwellian
@@ -14,8 +13,7 @@ T_hot = 1
 velocities = np.zeros((n_sampled_collisions,2))
 for collision_i in range(n_sampled_collisions):
     position, velocity = run_collision_simulation(alpha= alpha,
-                                                  hole_distance=hole_distance,
-                                                  hole_diameter=diamenter,
+                                                  hole_length=hole_length,
                                                   position=position,
                                                   velocity= velocity,
                                                   T_hot=T_hot,
